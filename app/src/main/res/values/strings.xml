@@ -11,4 +11,8 @@
     <string name="drawer_close">Close</string>
     <string name="nav_row_item_text">Home</string>
     <string name="nav_copyright_text">Copyright Framgia 2015</string>
+
+    <!--Category Detail-->
+    <string name="cat_detail_item_title">Hanoi street food tour: grazing, Vietnamese style</string>
+    <string name="cat_detail_item_desc">From noodles, to crispy pancakes and birds cooked in Coke cans, Natalie Paris takes a walking tour to discover some of Hanoi's best street food</string>
 </resources>
