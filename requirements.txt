@@ -1,0 +1,15 @@
+Travel category: http://www.telegraph.co.uk/travel/rssfeeds/
+
+Yêu cầu: Dựa trên con app demo của em. Trước mắt sẽ gồm 2 tab: news và history.
+
+1: Tại tab news trước mắt có thể chọn 1 vài category có sẵn. Có thể chọn 1 vài category là tên 1 vài thành phố nổi tiếng: London, Lisbon.... Chọn khoảng 20 category.
+
+2: Trang list: Hiển thị list item: đầy đủ nhưng thông tin: thumbnail (nếu có), title, short description… . Có thể lựa chọn giữa 2 dạng hiển thị là list hoặc gridview.
+
+3: Từ trang list show trang detail tương ứng từng item.
+
+4: Từ cả trang list và trang detail, người dùng có thể chọn favourite, sẽ lưu trữ lại những thông tin của những favourite để có thể xem offline (với trang list thì phải cache cả ảnh thumb, trang detail chỉ cần cache html , chưa cần cache ảnh hay style).
+
+5: Tại cả list và detail đề có 1 button để khi người dùng click vào sẽ hiển thị bản đồ move vào thành phố đó. (tên thành phố là tên category fix ở phần 1). Tại bản đồ có thể hiện route từ vị trí hiện tại đến thành phố đó!
+
+6: Tab History tương tự tab news, nhưng là hiển thị dữ liệu offline, truy vấn từ local!
