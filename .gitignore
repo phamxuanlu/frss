@@ -25,3 +25,14 @@ proguard/
 
 # Log Files
 *.log
+
+FRSS.iml
+
+.idea/
+app/proguard-rules.pro
+gradlew
+gradle/*.*
+volley/
+*.iml
+*.swp
+*~

@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">FRSS</string>
+
+    <!--HOME ACTIVITY-->
+    <!--Menu-->
+    <string name="action_settings">Settings</string>
+    <string name="action_help">Help</string>
+
+    <!--Navigation-->
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    <string name="nav_row_item_text">Home</string>
+    <string name="nav_copyright_text">Copyright Framgia 2015</string>
+</resources>

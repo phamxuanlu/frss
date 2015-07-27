@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="drawer_layout_width">240dp</dimen>
+
+    <!--News Category Row-->
+    <dimen name="news_cat_card_margin_top_bottom">5dp</dimen>
+    <dimen name="news_cat_card_margin_right_left">8dp</dimen>
+    <dimen name="news_cat_card_corner_radius">4dp</dimen>
+    <dimen name="news_cat_card_elevation">2dp</dimen>
+    <dimen name="news_cat_layout_padding_left_right">16dp</dimen>
+    <dimen name="news_cat_layout_padding_top_bottom">8dp</dimen>
+    <dimen name="news_cat_text_size">12sp</dimen>
+
+    <!--Navigation Drawer-->
+    <dimen name="nav_row_view_width">0dp</dimen>
+    <dimen name="nav_row_image_size">40dp</dimen>
+    <dimen name="nav_row_text_margin_left">20dp</dimen>
+    <dimen name="nav_row_text_size">20sp</dimen>
+    <dimen name="nav_frag_copyright_text_padding">10dp</dimen>
+    <dimen name="nav_frag_copyright_text_size">13sp</dimen>
+    <dimen name="nav_frag_padding">30dp</dimen>
+
+</resources>
