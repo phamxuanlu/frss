@@ -8,8 +8,9 @@ import android.graphics.Typeface;
 public class AppConfigs {
 
     private static AppConfigs _instance;
-    public Typeface openSansRegular;
+    public Typeface ROBOTO_CL;
     public Typeface openSansLight;
+    public float SCREEN_DENSITY;
 
     private AppConfigs() {
         super();

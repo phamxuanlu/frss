@@ -1,5 +1,6 @@
 package com.framgia.lupx.frss.activities;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -29,14 +30,19 @@ import com.framgia.lupx.frss.models.RSSCategory;
 
 public class CategoryDetailActivity extends AppCompatActivity implements GetDataCallback<RSSCategory> {
     public static final String CATEGORY_URL_ID = "CATEGORY_URL_ID";
+    private static final String IS_DISPLAY_TYPE_GRID = "IS_DISPLAY_TYPE_GRID";
     private Toolbar toolbar;
     private RSSCategory currCat;
     private ProgressBar loading;
     private boolean isShowGrid = false;
+    private SharedPreferences pref;
+    private ActionBar actionBar;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_category_detail, menu);
+        MenuItem item = menu.findItem(R.id.action_show_grid);
+        item.setIcon(isShowGrid ? R.drawable.ic_list : R.drawable.ic_grid);
         return true;
     }
 
@@ -47,8 +53,10 @@ public class CategoryDetailActivity extends AppCompatActivity implements GetData
             isShowGrid = !isShowGrid;
             if (isShowGrid) {
                 showGrid();
+                item.setIcon(R.drawable.ic_list);
             } else {
                 showList();
+                item.setIcon(R.drawable.ic_grid);
             }
             return true;
         }
@@ -59,22 +67,36 @@ public class CategoryDetailActivity extends AppCompatActivity implements GetData
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_detail);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
+        setupViews();
+        loadCategory();
+    }
 
-        loading = (ProgressBar) findViewById(R.id.loading);
+    private void loadCategory() {
+        pref = getSharedPreferences("FRSS", MODE_PRIVATE);
+        String lastUrl = pref.getString(CATEGORY_URL_ID, CATEGORY_URL_ID);
+        isShowGrid = pref.getBoolean(IS_DISPLAY_TYPE_GRID, false);
         String url = getIntent().getStringExtra(CATEGORY_URL_ID);
+        if (url == null) {
+            url = lastUrl;
+        }
         int size = FakeData.getInstance().fakeCategories.size();
         for (int i = 0; i < size; i++) {
             if (FakeData.getInstance().fakeCategories.get(i).url.equals(url)) {
                 currCat = FakeData.getInstance().fakeCategories.get(i);
+                pref.edit().putString(CATEGORY_URL_ID, url).apply();
                 break;
             }
         }
-        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(currCat.name);
         fetchData(url);
+    }
+
+    private void setupViews() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        loading = (ProgressBar) findViewById(R.id.loading);
     }
 
     private void fetchData(String url) {
@@ -118,6 +140,7 @@ public class CategoryDetailActivity extends AppCompatActivity implements GetData
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.replace(R.id.fragment_container, fragment);
         transaction.commit();
+        pref.edit().putBoolean(IS_DISPLAY_TYPE_GRID, true).apply();
     }
 
     private void showList() {
@@ -129,6 +152,7 @@ public class CategoryDetailActivity extends AppCompatActivity implements GetData
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.replace(R.id.fragment_container, fragment);
         transaction.commit();
+        pref.edit().putBoolean(IS_DISPLAY_TYPE_GRID, false).apply();
     }
 
     @Override

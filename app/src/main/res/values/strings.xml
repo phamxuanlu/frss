@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">FRSS</string>
-
+    <string name="article_detail_activity"></string>
     <!--HOME ACTIVITY-->
     <!--Menu-->
     <string name="action_settings">Settings</string>
@@ -13,6 +13,6 @@
     <string name="nav_copyright_text">Copyright Framgia 2015</string>
 
     <!--Category Detail-->
-    <string name="cat_detail_item_title">Hanoi street food tour: grazing, Vietnamese style</string>
-    <string name="cat_detail_item_desc">From noodles, to crispy pancakes and birds cooked in Coke cans, Natalie Paris takes a walking tour to discover some of Hanoi's best street food</string>
+    <string name="cat_detail_item_title">Hanoi street food tour grazing Vietnamese style</string>
+    <string name="cat_detail_item_desc">From noodles to crispy pancakes and birds cooked in Coke cans Natalie Paris takes a walking tour to discover some of Hanois best street food</string>
 </resources>

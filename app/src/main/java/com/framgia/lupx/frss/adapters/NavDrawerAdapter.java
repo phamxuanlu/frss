@@ -46,7 +46,7 @@ public class NavDrawerAdapter extends RecyclerView.Adapter<NavDrawerAdapter.NavV
     public void onBindViewHolder(NavViewHolder holder, final int position) {
         NavDrawerItem item = items.get(position);
         holder.name.setText(item.name);
-        holder.name.setTypeface(AppConfigs.getInstance().openSansLight);
+        holder.name.setTypeface(AppConfigs.getInstance().ROBOTO_CL);
         holder.icon.setImageResource(item.icon);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

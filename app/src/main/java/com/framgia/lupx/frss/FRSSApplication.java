@@ -8,14 +8,16 @@ import android.graphics.Typeface;
  */
 public class FRSSApplication extends Application {
 
-    private String FONT_OPENSANS_REGULAR = "font/OpenSans-Regular.ttf";
-    private String FONT_OPENSANS_LIGHT = "font/OpenSans-Light.ttf";
+    private String FONT_OPENSANS_REGULAR = "fonts/OpenSans-Regular.ttf";
+    private String FONT_OPENSANS_LIGHT = "fonts/OpenSans-Light.ttf";
+    private String FONT_ROBOTO_CONDENSED_LIGHT = "fonts/RobotoCondensed-Light.ttf";
 
     @Override
     public void onCreate() {
         super.onCreate();
-        AppConfigs.getInstance().openSansRegular = Typeface.createFromAsset(getAssets(), FONT_OPENSANS_REGULAR);
+        AppConfigs.getInstance().ROBOTO_CL = Typeface.createFromAsset(getAssets(), FONT_ROBOTO_CONDENSED_LIGHT);
         AppConfigs.getInstance().openSansLight = Typeface.createFromAsset(getAssets(), FONT_OPENSANS_LIGHT);
+        AppConfigs.getInstance().SCREEN_DENSITY = getApplicationContext().getResources().getDisplayMetrics().density;
     }
 
 }
