@@ -39,8 +39,7 @@ public class NavDrawerAdapter extends RecyclerView.Adapter<NavDrawerAdapter.NavV
     @Override
     public NavViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
         View view = inflater.inflate(R.layout.nav_drawer_row, viewGroup, false);
-        NavViewHolder holder = new NavViewHolder(view);
-        return holder;
+        return new NavViewHolder(view);
     }
 
     @Override

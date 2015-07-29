@@ -36,8 +36,7 @@ public class ListCategoriesAdapter extends RecyclerView.Adapter<ListCategoriesAd
     @Override
     public CategoryViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
         View view = inflater.inflate(R.layout.news_category_row, viewGroup, false);
-        CategoryViewHolder holder = new CategoryViewHolder(view);
-        return holder;
+        return new CategoryViewHolder(view);
     }
 
     @Override

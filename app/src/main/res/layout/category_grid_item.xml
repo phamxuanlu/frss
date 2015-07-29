@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card:cardCornerRadius="@dimen/cat_detail_card_corner_radius"
+    card:cardElevation="@dimen/cat_detail_card_elevation">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="@color/cat_detail_text_background"
+            android:paddingBottom="@dimen/cat_detail_title_text_padding_top"
+            android:paddingLeft="@dimen/cat_detail_title_text_padding_left_right"
+            android:paddingRight="@dimen/cat_detail_title_text_padding_left_right"
+            android:paddingTop="@dimen/cat_detail_title_text_padding_top"
+            android:text="Hanoi street food tour: grazing, Vietnamese style"
+            android:textColor="@color/cat_detail_text_color"
+            android:textSize="@dimen/cat_detail_title_text_size"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imgFeatureImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cat_detail_grid_image_height"
+            android:layout_below="@+id/txtTitle"
+            android:background="@android:color/transparent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/thumb" />
+
+
+        <TextView
+            android:id="@+id/txtDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgFeatureImage"
+            android:background="@color/cat_detail_text_background"
+            android:padding="@dimen/cat_detail_grid_item_des_padding"
+            android:text="From noodles, to crispy pancakes and birds cooked in Coke cans, Natalie Paris takes a walking tour to discover some of Hanoi's best street food"
+            android:textSize="@dimen/cat_detail_description_text_size" />
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

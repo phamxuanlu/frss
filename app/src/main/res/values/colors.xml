@@ -5,7 +5,15 @@
     <color name="color_primary_dark">#0288D1</color>
     <color name="color_accent">#03A9F4</color>
 
+    <!--Home activity-->
+    <color name="home_tab_background">#ff60f4e1</color>
+
     <!--Navigation-->
     <color name="nav_row_text_color">#101010</color>
     <color name="nav_frag_background">#FFFFFF</color>
+
+    <!--Category Detail-->
+    <color name="cat_detail_text_color">#101010</color>
+    <color name="cat_detail_text_background">#FFFFFF</color>
+
 </resources>

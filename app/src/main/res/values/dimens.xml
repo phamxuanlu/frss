@@ -20,4 +20,15 @@
     <dimen name="nav_frag_copyright_text_size">13sp</dimen>
     <dimen name="nav_frag_padding">30dp</dimen>
 
+    <!--Category Detail-->
+    <dimen name="cat_detail_card_elevation">2dp</dimen>
+    <dimen name="cat_detail_card_corner_radius">4dp</dimen>
+    <dimen name="cat_detail_feature_image_width">150dp</dimen>
+    <dimen name="cat_detail_title_text_size">18sp</dimen>
+    <dimen name="cat_detail_title_text_padding_top">5dp</dimen>
+    <dimen name="cat_detail_title_text_padding_left_right">10dp</dimen>
+    <dimen name="cat_detail_description_text_size">15sp</dimen>
+    <dimen name="cat_detail_grid_image_height">200dp</dimen>
+    <dimen name="cat_detail_grid_item_des_padding">5dp</dimen>
+
 </resources>
