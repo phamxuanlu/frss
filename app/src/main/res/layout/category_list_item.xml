@@ -3,17 +3,21 @@
     xmlns:card="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/cat_detail_list_item_margin_top_bottom"
+    android:layout_marginTop="@dimen/cat_detail_list_item_margin_top_bottom"
     card:cardCornerRadius="@dimen/cat_detail_card_corner_radius"
     card:cardElevation="@dimen/cat_detail_card_elevation">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="@dimen/cat_detail_list_item_padding">
 
         <ImageView
             android:id="@+id/imgFeatureImage"
             android:layout_width="@dimen/cat_detail_feature_image_width"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/cat_detail_feature_image_height"
+            android:layout_below="@+id/txtTitle"
             android:background="@android:color/transparent"
             android:scaleType="centerCrop"
             android:src="@drawable/thumb" />
@@ -22,13 +26,12 @@
             android:id="@+id/txtTitle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/imgFeatureImage"
-            android:paddingLeft="@dimen/cat_detail_title_text_padding_left_right"
+            android:layout_marginBottom="@dimen/cat_detail_list_item_title_margin_bottom"
+            android:gravity="left"
             android:paddingTop="@dimen/cat_detail_title_text_padding_top"
             android:text="@string/cat_detail_item_title"
             android:textColor="@color/cat_detail_text_color"
-            android:textSize="@dimen/cat_detail_title_text_size"
-            android:textStyle="bold" />
+            android:textSize="@dimen/cat_detail_title_text_size" />
 
         <TextView
             android:id="@+id/txtDescription"
@@ -36,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtTitle"
             android:layout_toRightOf="@+id/imgFeatureImage"
-            android:padding="@dimen/cat_detail_grid_item_des_padding"
+            android:paddingLeft="@dimen/cat_detail_grid_item_des_padding"
             android:text="@string/cat_detail_item_desc"
             android:textSize="@dimen/cat_detail_description_text_size" />
     </RelativeLayout>

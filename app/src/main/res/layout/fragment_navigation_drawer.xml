@@ -6,19 +6,11 @@
     android:paddingLeft="@dimen/nav_frag_padding"
     android:paddingRight="@dimen/nav_frag_padding">
 
-    <RelativeLayout
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/drawer_layout_width">
-
-    </RelativeLayout>
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/drawerList"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@+id/copyright"
-        android:layout_below="@+id/header" />
+        android:layout_above="@+id/copyright" />
 
     <TextView
         android:id="@+id/copyright"
