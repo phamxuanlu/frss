@@ -46,12 +46,8 @@ public class CategoryDetailFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (view == null) {
-            view = inflater.inflate(R.layout.category_detail_fragment, container, false);
-            setupViews(view);
-        } else {
-            ((ViewGroup) view.getParent()).removeView(view);
-        }
+        view = inflater.inflate(R.layout.category_detail_fragment, container, false);
+        setupViews(view);
         return view;
     }
 

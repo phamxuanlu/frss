@@ -1,6 +1,5 @@
 package com.framgia.lupx.frss.rssparser;
 
-import android.text.Html;
 import android.util.Xml;
 
 import com.framgia.lupx.frss.models.RSSCategory;
@@ -8,13 +7,11 @@ import com.framgia.lupx.frss.models.RSSItem;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 
 /**
  * Created by FRAMGIA\pham.xuan.lu on 27/07/2015.
@@ -69,7 +66,7 @@ public class RSSParser {
             } else if (name.equals("description")) {
                 description = readDescription(parser);
             } else if (name.equals("enclosure")) {
-                enclosure = readEnclosure(parser);
+                enclosure = readThumbnail(parser);
             } else if (name.equals("pubDate")) {
                 pubDate = readPubDate(parser);
             } else if (name.equals("author")) {
@@ -81,7 +78,7 @@ public class RSSParser {
         item.title = title;
         item.link = link;
         item.description = description;
-        item.enclosure = enclosure;
+        item.thumbnail = enclosure;
         item.pubDate = pubDate;
         item.author = author;
         return item;
@@ -120,7 +117,7 @@ public class RSSParser {
         return pubDate;
     }
 
-    private String readEnclosure(XmlPullParser parser) throws IOException, XmlPullParserException {
+    private String readThumbnail(XmlPullParser parser) throws IOException, XmlPullParserException {
         String en = "";
         parser.require(XmlPullParser.START_TAG, null, "enclosure");
         String tag = parser.getName();

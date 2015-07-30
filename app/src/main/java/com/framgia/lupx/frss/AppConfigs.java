@@ -11,6 +11,7 @@ public class AppConfigs {
     public Typeface ROBOTO_CL;
     public Typeface openSansLight;
     public float SCREEN_DENSITY;
+    public String DATABASE_NAME;
 
     private AppConfigs() {
         super();

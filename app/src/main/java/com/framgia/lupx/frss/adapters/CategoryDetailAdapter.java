@@ -1,7 +1,6 @@
 package com.framgia.lupx.frss.adapters;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,9 +56,9 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<CategoryDetailAd
         if (holder.task != null && !holder.task.isCancelled()) {
             holder.task.cancel(true);
         }
-        if (item.enclosure != null && !item.enclosure.equals("")) {
+        if (item.thumbnail != null && !item.thumbnail.equals("")) {
             holder.task = new LoadImageAsyncTask(context, holder.img);
-            holder.task.execute(item.enclosure);
+            holder.task.execute(item.thumbnail);
             holder.img.setVisibility(View.VISIBLE);
         } else {
             holder.img.setVisibility(View.GONE);

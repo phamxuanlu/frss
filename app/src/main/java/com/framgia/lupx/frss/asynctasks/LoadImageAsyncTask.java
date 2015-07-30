@@ -7,7 +7,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.framgia.lupx.frss.BitmapLruCache;
+import com.framgia.lupx.frss.cache.BitmapLruCache;
 import com.framgia.lupx.frss.BuildConfig;
 
 import java.io.IOException;

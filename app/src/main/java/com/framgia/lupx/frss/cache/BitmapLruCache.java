@@ -1,4 +1,4 @@
-package com.framgia.lupx.frss;
+package com.framgia.lupx.frss.cache;
 
 import android.graphics.Bitmap;
 import android.util.LruCache;
