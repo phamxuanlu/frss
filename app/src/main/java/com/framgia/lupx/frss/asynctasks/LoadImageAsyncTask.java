@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.framgia.lupx.frss.cache.BitmapLruCache;
 import com.framgia.lupx.frss.BuildConfig;
+import com.framgia.lupx.frss.cache.DiskBitmapCache;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,12 +25,17 @@ public class LoadImageAsyncTask extends AsyncTask<String, Void, Void> {
     private static final int IMAGE_DESIRED_HEIGHT = 150;
     private WeakReference<ImageView> imgRef;
     private Context context;
-    private String url;
+    private String link;
     private Bitmap bitmap;
+    private boolean isDiskCache;
 
     public LoadImageAsyncTask(Context context, ImageView imgV) {
         this.context = context;
         this.imgRef = new WeakReference<ImageView>(imgV);
+    }
+
+    public void setIsDiskCache(boolean isLFD) {
+        this.isDiskCache = isLFD;
     }
 
     private int inSampleSize(BitmapFactory.Options options, int W, int H) {
@@ -48,16 +54,22 @@ public class LoadImageAsyncTask extends AsyncTask<String, Void, Void> {
 
     @Override
     protected Void doInBackground(String... params) {
-        url = params[0];
-        if (BitmapLruCache.getInstance().get(url) != null) {
-            bitmap = BitmapLruCache.getInstance().get(url);
+        link = params[0];
+        if (BitmapLruCache.getInstance().get(link) != null) {
+            bitmap = BitmapLruCache.getInstance().get(link);
+            if (isDiskCache && bitmap != null) {
+                DiskBitmapCache.getInstance(context).put(link, bitmap);
+            }
+            return null;
+        } else if (DiskBitmapCache.getInstance(context).containKey(link)) {
+            bitmap = DiskBitmapCache.getInstance(context).get(link);
             return null;
         }
         if (isCancelled()) {
             return null;
         }
         try {
-            URL url = new URL(this.url);
+            URL url = new URL(this.link);
             InputStream in = url.openStream();
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = true;
@@ -68,7 +80,10 @@ public class LoadImageAsyncTask extends AsyncTask<String, Void, Void> {
             if (BuildConfig.DEBUG) {
                 Log.v("BITMAP SIZE", "(W,H)=(" + bitmap.getWidth() + "," + bitmap.getHeight() + ")");
             }
-            BitmapLruCache.getInstance().put(this.url, bitmap);
+            BitmapLruCache.getInstance().put(this.link, bitmap);
+            if (isDiskCache) {
+                DiskBitmapCache.getInstance(context).put(link, bitmap);
+            }
         } catch (IOException ex) {
 
         }

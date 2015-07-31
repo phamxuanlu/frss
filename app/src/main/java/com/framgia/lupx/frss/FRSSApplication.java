@@ -9,9 +9,8 @@ import android.graphics.Typeface;
  */
 public class FRSSApplication extends Application {
 
-    private String FONT_OPENSANS_REGULAR = "fonts/OpenSans-Regular.ttf";
-    private String FONT_OPENSANS_LIGHT = "fonts/OpenSans-Light.ttf";
-    private String FONT_ROBOTO_CONDENSED_LIGHT = "fonts/RobotoCondensed-Light.ttf";
+    private String FONT_ROBOTO_THIN = "fonts/Roboto-Thin.ttf";
+    private String FONT_ROBOTO_LIGHT = "fonts/Roboto-Light.ttf";
     private String PACKAGE_NAME;
     private final int DISK_CACHE_SIZE = 10 * 1024 * 1024;
     private final Bitmap.CompressFormat DISK_CACHE_FORMAT = Bitmap.CompressFormat.JPEG;
@@ -22,9 +21,10 @@ public class FRSSApplication extends Application {
         super.onCreate();
         PACKAGE_NAME = getPackageName();
         AppConfigs.getInstance().DATABASE_NAME = getPackageName();
-        AppConfigs.getInstance().ROBOTO_CL = Typeface.createFromAsset(getAssets(), FONT_ROBOTO_CONDENSED_LIGHT);
-        AppConfigs.getInstance().openSansLight = Typeface.createFromAsset(getAssets(), FONT_OPENSANS_LIGHT);
+        AppConfigs.getInstance().ROBOTO_LIGHT = Typeface.createFromAsset(getAssets(), FONT_ROBOTO_LIGHT);
+        AppConfigs.getInstance().ROBOTO_THIN = Typeface.createFromAsset(getAssets(), FONT_ROBOTO_THIN);
         AppConfigs.getInstance().SCREEN_DENSITY = getApplicationContext().getResources().getDisplayMetrics().density;
+        AppConfigs.getInstance().CACHE_DIR = ".thumbnails";
     }
 
 }

@@ -43,7 +43,7 @@ public class ListCategoriesAdapter extends RecyclerView.Adapter<ListCategoriesAd
     public void onBindViewHolder(CategoryViewHolder holder, final int position) {
         RSSCategory category = categories.get(position);
         holder.lbCategoryName.setText(category.name);
-        holder.lbCategoryName.setTypeface(AppConfigs.getInstance().ROBOTO_CL);
+        holder.lbCategoryName.setTypeface(AppConfigs.getInstance().ROBOTO_LIGHT);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
