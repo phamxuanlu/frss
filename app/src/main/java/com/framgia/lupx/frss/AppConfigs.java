@@ -8,10 +8,11 @@ import android.graphics.Typeface;
 public class AppConfigs {
 
     private static AppConfigs _instance;
-    public Typeface ROBOTO_CL;
-    public Typeface openSansLight;
+    public Typeface ROBOTO_LIGHT;
+    public Typeface ROBOTO_THIN;
     public float SCREEN_DENSITY;
     public String DATABASE_NAME;
+    public String CACHE_DIR;
 
     private AppConfigs() {
         super();

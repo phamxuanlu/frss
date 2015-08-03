@@ -23,7 +23,9 @@ import com.framgia.lupx.frss.AppConfigs;
 import com.framgia.lupx.frss.FRSSRequestQueue;
 import com.framgia.lupx.frss.FakeData;
 import com.framgia.lupx.frss.R;
+import com.framgia.lupx.frss.asynctasks.LoadImageAsyncTask;
 import com.framgia.lupx.frss.asynctasks.RSSParsingAsyncTask;
+import com.framgia.lupx.frss.cache.DiskBitmapCache;
 import com.framgia.lupx.frss.database.DatabaseHelper;
 import com.framgia.lupx.frss.fragments.CategoryDetailFragment;
 import com.framgia.lupx.frss.fragments.GetDataCallback;
@@ -87,14 +89,24 @@ public class CategoryDetailActivity extends AppCompatActivity implements GetData
         if (isFavorite) {
             int catid = catDbHelper.insert(currCat);
             for (int i = 0; i < currCat.items.size(); i++) {
-                currCat.items.get(i).catId = catid;
-                currCat.items.get(i).id = itemDbHelper.insert(currCat.items.get(i));
+                RSSItem item = currCat.items.get(i);
+                item.catId = catid;
+                item.id = itemDbHelper.insert(item);
+                if (item.thumbnail != null) {
+                    LoadImageAsyncTask saveTask = new LoadImageAsyncTask(this, null);
+                    saveTask.setIsDiskCache(true);
+                    saveTask.execute(item.thumbnail);
+                }
             }
             Toast.makeText(this, currCat.name + " added to favorites", Toast.LENGTH_SHORT).show();
         } else {
             catDbHelper.delete(" url LIKE '" + currCat.url + "'");
             for (int i = 0; i < currCat.items.size(); i++) {
-                itemDbHelper.delete(" link LIKE '" + currCat.items.get(i).link + "'");
+                RSSItem item = currCat.items.get(i);
+                itemDbHelper.delete(" link LIKE '" + item.link + "'");
+                if (item.thumbnail != null) {
+                    DiskBitmapCache.getInstance(this).remove(item.thumbnail);
+                }
             }
             Toast.makeText(this, currCat.name + "was remove from favorites", Toast.LENGTH_SHORT).show();
         }

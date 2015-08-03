@@ -48,7 +48,6 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<CategoryDetailAd
     }
 
     @Override
-
     public void onBindViewHolder(ItemViewHolder holder, final int position) {
         RSSItem item = category.items.get(position);
         holder.txtTitle.setText(item.title);
@@ -89,8 +88,8 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<CategoryDetailAd
             img = (ImageView) view.findViewById(R.id.imgFeatureImage);
             txtDes = (TextView) view.findViewById(R.id.txtDescription);
             txtTitle = (TextView) view.findViewById(R.id.txtTitle);
-            txtTitle.setTypeface(AppConfigs.getInstance().ROBOTO_CL);
-            txtDes.setTypeface(AppConfigs.getInstance().ROBOTO_CL);
+            txtTitle.setTypeface(AppConfigs.getInstance().ROBOTO_LIGHT);
+            txtDes.setTypeface(AppConfigs.getInstance().ROBOTO_LIGHT);
         }
     }
 
