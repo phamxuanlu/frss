@@ -3,6 +3,7 @@ package com.framgia.lupx.frss.models;
 import com.framgia.lupx.frss.database.DBField;
 import com.framgia.lupx.frss.database.DBKey;
 import com.framgia.lupx.frss.database.DBTable;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +23,19 @@ public class RSSCategory {
     @DBField(fieldName = "name", type = "text")
     public String name;
 
+    @DBField(fieldName = "corLat", type = "real")
+    public double cordinateLat;
+
+    @DBField(fieldName = "corLong", type = "real")
+    public double cordinateLong;
+
     public List<RSSItem> items = new ArrayList<>();
 
-    public RSSCategory(String name, String url) {
+    public RSSCategory(String name, String url, LatLng cor) {
         this.name = name;
         this.url = url;
+        this.cordinateLat = cor.latitude;
+        this.cordinateLong = cor.longitude;
     }
 
     public RSSCategory() {

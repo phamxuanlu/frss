@@ -2,6 +2,7 @@ package com.framgia.lupx.frss.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -81,6 +82,15 @@ public class CategoryDetailActivity extends AppCompatActivity implements GetData
             isFavorite = !isFavorite;
             setFavorite(isFavorite);
             item.setIcon(isFavorite ? R.drawable.ic_favorited32 : R.drawable.ic_no_favorite32);
+        }
+        if (id == R.id.action_maps) {
+            Intent intent = new Intent(this, MapActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putDouble("LAT", currCat.cordinateLat);
+            bundle.putDouble("LONG", currCat.cordinateLong);
+            bundle.putString("CITY_NAME", currCat.name);
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
