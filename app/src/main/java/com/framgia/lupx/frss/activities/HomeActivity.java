@@ -14,6 +14,7 @@ import android.view.View;
 import com.framgia.lupx.frss.R;
 import com.framgia.lupx.frss.adapters.HomeViewPagerAdapter;
 import com.framgia.lupx.frss.adapters.RecyclerViewItemClickListener;
+import com.framgia.lupx.frss.dialog.AboutDialog;
 import com.framgia.lupx.frss.fragments.CategoriesFragment;
 import com.framgia.lupx.frss.fragments.DrawerFragment;
 import com.framgia.lupx.frss.models.NavDrawerItem;
@@ -31,7 +32,18 @@ public class HomeActivity extends AppCompatActivity implements DrawerFragment.Ge
         return new RecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View itemView, int position) {
-                Snackbar.make(home_layout, "Nav Item Click " + position, Snackbar.LENGTH_SHORT).show();
+                switch (position) {
+                    case 0:
+                        viewPager.setCurrentItem(0);
+                        break;
+                    case 1:
+                        viewPager.setCurrentItem(1);
+                        break;
+                    case 2:
+                        AboutDialog aboutDialog = new AboutDialog(HomeActivity.this);
+                        aboutDialog.show();
+                        break;
+                }
                 drawerFragment.closeNavDrawer();
             }
         };
@@ -41,15 +53,13 @@ public class HomeActivity extends AppCompatActivity implements DrawerFragment.Ge
     private Toolbar toolbar;
     private ViewPager viewPager;
     private TabLayout tabLayout;
-    private View home_layout;
 
     @Override
     public List<NavDrawerItem> getNavItems() {
         List<NavDrawerItem> items = new ArrayList<>();
-        items.add(new NavDrawerItem(R.drawable.globe, "Home"));
-        items.add(new NavDrawerItem(R.drawable.globe, "News"));
-        items.add(new NavDrawerItem(R.drawable.globe, "History"));
-        items.add(new NavDrawerItem(R.drawable.globe, "About"));
+        items.add(new NavDrawerItem(R.drawable.ic_news, "News"));
+        items.add(new NavDrawerItem(R.drawable.ic_favorite, "Favorite"));
+        items.add(new NavDrawerItem(R.drawable.ic_about, "About"));
         return items;
     }
 
@@ -66,7 +76,6 @@ public class HomeActivity extends AppCompatActivity implements DrawerFragment.Ge
         viewPager = (ViewPager) findViewById(R.id.tabanim_viewpager);
         setupViewPager(viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabanim_tabs);
-        home_layout = findViewById(R.id.home_layout);
         tabLayout.setupWithViewPager(viewPager);
         drawerFragment = (DrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setup(R.id.fragment_navigation_drawer,
@@ -77,7 +86,9 @@ public class HomeActivity extends AppCompatActivity implements DrawerFragment.Ge
     private void setupViewPager(ViewPager viewPager) {
         HomeViewPagerAdapter adapter = new HomeViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new CategoriesFragment(), "News");
-        adapter.addFragment(new CategoriesFragment(), "History");
+        CategoriesFragment favoriteFragment = new CategoriesFragment();
+        favoriteFragment.setLoadFavorite(true);
+        adapter.addFragment(favoriteFragment, "Favorite");
         viewPager.setAdapter(adapter);
     }
 
@@ -91,6 +102,8 @@ public class HomeActivity extends AppCompatActivity implements DrawerFragment.Ge
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            AboutDialog aboutDialog = new AboutDialog(HomeActivity.this);
+            aboutDialog.show();
             return true;
         }
         return super.onOptionsItemSelected(item);

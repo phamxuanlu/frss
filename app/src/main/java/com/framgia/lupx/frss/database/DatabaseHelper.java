@@ -212,7 +212,6 @@ public class DatabaseHelper<T> extends SQLiteOpenHelper {
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
-
         return obj;
     }
 

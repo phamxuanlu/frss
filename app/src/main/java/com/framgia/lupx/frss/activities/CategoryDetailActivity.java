@@ -1,9 +1,11 @@
 package com.framgia.lupx.frss.activities;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -38,7 +40,6 @@ import java.util.List;
 /**
  * Created by FRAMGIA\pham.xuan.lu on 24/07/2015.
  */
-
 public class CategoryDetailActivity extends AppCompatActivity implements GetDataCallback<RSSCategory> {
     public static final String CATEGORY_URL_ID = "CATEGORY_URL_ID";
     private static final String IS_DISPLAY_TYPE_GRID = "IS_DISPLAY_TYPE_GRID";
@@ -54,6 +55,8 @@ public class CategoryDetailActivity extends AppCompatActivity implements GetData
     private DatabaseHelper<RSSCategory> catDbHelper;
     private DatabaseHelper<RSSItem> itemDbHelper;
     private RSSParsingAsyncTask task;
+    private ProgressDialog progress;
+    private int numpic = 0;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -97,6 +100,7 @@ public class CategoryDetailActivity extends AppCompatActivity implements GetData
 
     private void setFavorite(boolean isFavorite) {
         if (isFavorite) {
+            progress.show();
             int catid = catDbHelper.insert(currCat);
             for (int i = 0; i < currCat.items.size(); i++) {
                 RSSItem item = currCat.items.get(i);
@@ -105,6 +109,16 @@ public class CategoryDetailActivity extends AppCompatActivity implements GetData
                 if (item.thumbnail != null) {
                     LoadImageAsyncTask saveTask = new LoadImageAsyncTask(this, null);
                     saveTask.setIsDiskCache(true);
+                    numpic++;
+                    saveTask.setOnExecutedListener(new LoadImageAsyncTask.OnExecutedListener() {
+                        @Override
+                        public void onExecuted(Bitmap bm) {
+                            numpic--;
+                            if (numpic == 0) {
+                                progress.dismiss();
+                            }
+                        }
+                    });
                     saveTask.execute(item.thumbnail);
                 }
             }
@@ -133,7 +147,6 @@ public class CategoryDetailActivity extends AppCompatActivity implements GetData
         if (cats != null && cats.size() > 0) {
             isFavorite = true;
         }
-
     }
 
     @Override
@@ -151,6 +164,11 @@ public class CategoryDetailActivity extends AppCompatActivity implements GetData
         actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         loading = (ProgressBar) findViewById(R.id.loading);
+        progress = new ProgressDialog(this);
+        progress.setIndeterminate(true);
+        progress.setCancelable(false);
+        progress.setMessage("Processing ...");
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
     }
 
     private void loadCategory() {
@@ -185,7 +203,9 @@ public class CategoryDetailActivity extends AppCompatActivity implements GetData
                         task.setOnParsedListener(new RSSParsingAsyncTask.RSSParserCompletedListener() {
                             @Override
                             public void onParsed(RSSCategory category) {
-                                currCat.items = category.items;
+                                if (category != null) {
+                                    currCat.items = category.items;
+                                }
                                 showData();
                             }
                         });
@@ -226,7 +246,12 @@ public class CategoryDetailActivity extends AppCompatActivity implements GetData
                             fetchData(currCat.url);
                         }
                     })
-                    .setNegativeButton("Cancel", null)
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    })
                     .create();
             dialog.show();
         }

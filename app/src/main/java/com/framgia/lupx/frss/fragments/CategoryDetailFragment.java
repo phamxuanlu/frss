@@ -26,7 +26,7 @@ import com.framgia.lupx.frss.widgets.GridItemDecoration;
 public class CategoryDetailFragment extends Fragment {
 
     public static final String IS_SHOW_GRID = "IS_SHOW_GRID";
-    private static final int GRID_SPACING_DP = 10;
+    private static final int GRID_SPACING_DP = 4;
     private static final int GRID_COLUMNS = 2;
     private RecyclerView recyclerView;
     private CategoryDetailAdapter adapter;
@@ -56,7 +56,7 @@ public class CategoryDetailFragment extends Fragment {
         isShowGrid = getArguments().getBoolean(IS_SHOW_GRID);
         if (isShowGrid) {
             adapter = new CategoryDetailAdapter(getActivity(), category, isShowGrid);
-            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), GRID_COLUMNS));
             recyclerView.addItemDecoration(new GridItemDecoration(DisplayUtils.dpToPixels(GRID_SPACING_DP), GRID_COLUMNS));
             recyclerView.setAdapter(adapter);
         } else {

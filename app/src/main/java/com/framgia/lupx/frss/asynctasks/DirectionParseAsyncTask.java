@@ -48,22 +48,26 @@ public class DirectionParseAsyncTask extends AsyncTask<String, Void, List<List<H
 
     @Override
     protected void onPostExecute(List<List<HashMap<String, String>>> lists) {
-        ArrayList<LatLng> points = null;
+        ArrayList<LatLng> points;
         PolylineOptions lineOptions = null;
+        HashMap<String, String> point;
+        double lat;
+        double lng;
         for (int i = 0; i < lists.size(); i++) {
             points = new ArrayList<LatLng>();
             lineOptions = new PolylineOptions();
             List<HashMap<String, String>> path = lists.get(i);
-            for (int j = 0; j < path.size(); j++) {
-                HashMap<String, String> point = path.get(j);
-                double lat = Double.parseDouble(point.get("lat"));
-                double lng = Double.parseDouble(point.get("lng"));
+            for (int j = 0; j < path.size(); j += 2) {
+                point = path.get(j);
+                lat = Double.parseDouble(point.get("lat"));
+                lng = Double.parseDouble(point.get("lng"));
                 LatLng pos = new LatLng(lat, lng);
                 points.add(pos);
             }
+            Log.v("NUMBER OF POINTS", "" + points.size());
             lineOptions.addAll(points);
-            lineOptions.width(2);
-            lineOptions.color(Color.RED);
+            lineOptions.width(5);
+            lineOptions.color(Color.BLUE);
         }
         if (listener != null) {
             listener.onParsed(lineOptions);
