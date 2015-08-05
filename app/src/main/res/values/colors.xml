@@ -16,4 +16,6 @@
     <color name="cat_detail_text_color">#101010</color>
     <color name="cat_detail_text_background">#FFFFFF</color>
 
+    <color name="item_text_color">#FFFFFF</color>
+    <color name="item_text_bg">#70000000</color>
 </resources>

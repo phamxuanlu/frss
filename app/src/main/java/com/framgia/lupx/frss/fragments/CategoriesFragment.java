@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import com.framgia.lupx.frss.activities.CategoryDetailActivity;
 import com.framgia.lupx.frss.adapters.ListCategoriesAdapter;
 import com.framgia.lupx.frss.adapters.RecyclerViewItemClickListener;
 import com.framgia.lupx.frss.models.RSSCategory;
+import com.framgia.lupx.frss.utils.DisplayUtils;
+import com.framgia.lupx.frss.widgets.GridItemDecoration;
 
 import java.util.List;
 
@@ -28,6 +31,8 @@ public class CategoriesFragment extends Fragment {
     private List<RSSCategory> categories;
     private RecyclerView listCategories;
     private ListCategoriesAdapter adapter;
+    private static final int GRID_SPACING_DP = 4;
+    private static final int GRID_COLUMNS = 2;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,14 +45,14 @@ public class CategoriesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_news_categories, container, false);
         listCategories = (RecyclerView) view.findViewById(R.id.listCategories);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), GRID_COLUMNS);
+        listCategories.addItemDecoration(new GridItemDecoration(DisplayUtils.dpToPixels(GRID_SPACING_DP), GRID_COLUMNS));
         listCategories.setLayoutManager(layoutManager);
         adapter = new ListCategoriesAdapter(getActivity(), categories);
         listCategories.setAdapter(adapter);
         adapter.setOnItemClickListener(new RecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View itemView, int position) {
-                //Snackbar.make(view, "Category " + position, Snackbar.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), CategoryDetailActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString(CategoryDetailActivity.CATEGORY_URL_ID, categories.get(position).url);

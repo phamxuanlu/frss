@@ -56,7 +56,7 @@ public class CategoryDetailFragment extends Fragment {
         isShowGrid = getArguments().getBoolean(IS_SHOW_GRID);
         if (isShowGrid) {
             adapter = new CategoryDetailAdapter(getActivity(), category, isShowGrid);
-            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), GRID_COLUMNS));
             recyclerView.addItemDecoration(new GridItemDecoration(DisplayUtils.dpToPixels(GRID_SPACING_DP), GRID_COLUMNS));
             recyclerView.setAdapter(adapter);
         } else {
