@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">FRSS</string>
     <string name="article_detail_activity"></string>
+    <string name="map_activity">Google Maps</string>
     <!--HOME ACTIVITY-->
     <!--Menu-->
     <string name="action_settings">Settings</string>
@@ -15,7 +16,11 @@
 
     <!--Category Detail-->
     <string name="menu_action_category_add_favorite">Favorite</string>
+    <string name="menu_action_category_maps">Map</string>
     <string name="cat_detail_item_title">Hanoi street food tour grazing Vietnamese style</string>
     <string name="cat_detail_item_desc">From noodles to crispy pancakes and birds cooked in Coke cans Natalie Paris takes a walking tour to discover some of Hanois best street food</string>
 
+    <!--Map-->
+    <string name="map_direction">Direction</string>
+    <string name="map_reset">Reset</string>
 </resources>

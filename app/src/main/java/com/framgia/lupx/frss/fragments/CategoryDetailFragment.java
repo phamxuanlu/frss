@@ -69,6 +69,9 @@ public class CategoryDetailFragment extends Fragment {
             public void onItemClick(View itemView, int position) {
                 Intent intent = new Intent(getActivity(), ArticleDetailActivity.class);
                 intent.putExtra(ArticleDetailActivity.ARTICLE_URL, category.items.get(position).link);
+                intent.putExtra("LAT", category.cordinateLat);
+                intent.putExtra("LONG", category.cordinateLong);
+                intent.putExtra("CITY_NAME", category.name);
                 getActivity().startActivity(intent);
             }
         });

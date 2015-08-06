@@ -7,4 +7,11 @@
         android:orderInCategory="99"
         android:title="@string/menu_action_category_add_favorite"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_maps"
+        android:icon="@drawable/my_location"
+        android:orderInCategory="98"
+        android:title="@string/menu_action_category_maps"
+        app:showAsAction="always" />
 </menu>
