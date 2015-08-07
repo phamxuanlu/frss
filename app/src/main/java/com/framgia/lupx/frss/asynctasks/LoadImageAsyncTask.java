@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.framgia.lupx.frss.cache.BitmapLruCache;
 import com.framgia.lupx.frss.BuildConfig;
 import com.framgia.lupx.frss.cache.DiskBitmapCache;
+import com.framgia.lupx.frss.utils.BitmapUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,6 +21,9 @@ import java.net.URL;
  * Created by FRAMGIA\pham.xuan.lu on 27/07/2015.
  */
 public class LoadImageAsyncTask extends AsyncTask<String, Void, Void> {
+    public interface OnExecutedListener {
+        void onExecuted(Bitmap bm);
+    }
 
     private static final int IMAGE_DESIRED_WIDTH = 150;
     private static final int IMAGE_DESIRED_HEIGHT = 150;
@@ -28,6 +32,7 @@ public class LoadImageAsyncTask extends AsyncTask<String, Void, Void> {
     private String link;
     private Bitmap bitmap;
     private boolean isDiskCache;
+    private OnExecutedListener listener;
 
     public LoadImageAsyncTask(Context context, ImageView imgV) {
         this.context = context;
@@ -38,18 +43,8 @@ public class LoadImageAsyncTask extends AsyncTask<String, Void, Void> {
         this.isDiskCache = isLFD;
     }
 
-    private int inSampleSize(BitmapFactory.Options options, int W, int H) {
-        final int rW = options.outWidth;
-        final int rH = options.outHeight;
-        int sampleSize = 1;
-        if (rH > H || rW > W) {
-            final int h = rH / 2;
-            final int w = rW / 2;
-            while ((h / sampleSize) > H && (w / sampleSize) > W) {
-                sampleSize *= 2;
-            }
-        }
-        return sampleSize;
+    public void setOnExecutedListener(OnExecutedListener listener) {
+        this.listener = listener;
     }
 
     @Override
@@ -74,10 +69,10 @@ public class LoadImageAsyncTask extends AsyncTask<String, Void, Void> {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = true;
             BitmapFactory.decodeStream(in, null, options);
-            options.inSampleSize = inSampleSize(options, IMAGE_DESIRED_WIDTH, IMAGE_DESIRED_HEIGHT);
+            options.inSampleSize = BitmapUtils.inSampleSize(options, IMAGE_DESIRED_WIDTH, IMAGE_DESIRED_HEIGHT);
             options.inJustDecodeBounds = false;
             bitmap = BitmapFactory.decodeStream(url.openStream(), null, options);
-            if (BuildConfig.DEBUG) {
+            if (BuildConfig.DEBUG && bitmap != null) {
                 Log.v("BITMAP SIZE", "(W,H)=(" + bitmap.getWidth() + "," + bitmap.getHeight() + ")");
             }
             BitmapLruCache.getInstance().put(this.link, bitmap);
@@ -85,7 +80,7 @@ public class LoadImageAsyncTask extends AsyncTask<String, Void, Void> {
                 DiskBitmapCache.getInstance(context).put(link, bitmap);
             }
         } catch (IOException ex) {
-
+            ex.printStackTrace();
         }
         return null;
     }
@@ -96,9 +91,15 @@ public class LoadImageAsyncTask extends AsyncTask<String, Void, Void> {
             return;
         }
         if (imgRef.get() != null) {
-            if (bitmap != null) {
-                imgRef.get().setImageBitmap(bitmap);
+            String tag = (String) imgRef.get().getTag();
+            if (tag != null && tag.compareTo(link) == 0) {
+                if (bitmap != null) {
+                    imgRef.get().setImageBitmap(bitmap);
+                }
             }
+        }
+        if (listener != null) {
+            listener.onExecuted(bitmap);
         }
     }
 

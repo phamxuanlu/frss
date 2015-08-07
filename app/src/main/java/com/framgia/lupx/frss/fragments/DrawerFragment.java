@@ -12,7 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.framgia.lupx.frss.AppConfigs;
 import com.framgia.lupx.frss.R;
 import com.framgia.lupx.frss.adapters.NavDrawerAdapter;
 import com.framgia.lupx.frss.adapters.RecyclerViewItemClickListener;
@@ -74,6 +76,7 @@ public class DrawerFragment extends Fragment {
         drawerAdapter = new NavDrawerAdapter(getActivity().getBaseContext(), navItems);
         drawerList.setAdapter(drawerAdapter);
         drawerAdapter.setOnItemClickListener(itemClickListener);
+        ((TextView) view.findViewById(R.id.copyright)).setTypeface(AppConfigs.getInstance().ROBOTO_LIGHT);
         return view;
     }
 

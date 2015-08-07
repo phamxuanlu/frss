@@ -33,6 +33,7 @@ import org.jsoup.select.Elements;
 import java.util.List;
 
 public class ArticleDetailActivity extends AppCompatActivity {
+
     public static final String ARTICLE_URL = "ARTICLE_URL";
 
     private WebView browser;
@@ -97,6 +98,7 @@ public class ArticleDetailActivity extends AppCompatActivity {
         loading = (ProgressBar) findViewById(R.id.loading);
         browser = (WebView) findViewById(R.id.webview);
         browser.getSettings().setJavaScriptEnabled(true);
+        //browser.getSettings().setUseWideViewPort(true);
         browser.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
     }
 
@@ -154,7 +156,13 @@ public class ArticleDetailActivity extends AppCompatActivity {
                             loadHtml(item.link);
                         }
                     })
-                    .setNegativeButton("Cancel", null)
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    })
+                    .setCancelable(false)
                     .create();
             dialog.show();
         }
@@ -172,7 +180,6 @@ public class ArticleDetailActivity extends AppCompatActivity {
             el.attr("width", "100%");
             el.attr("height", "auto");
         }
-
         Elements relateDiv = storyDiv.select("div#tmg-related-links");
         for (Element el : relateDiv) {
             el.remove();
@@ -184,6 +191,5 @@ public class ArticleDetailActivity extends AppCompatActivity {
         item.htmlContent = storyDiv.html();
         loadHtmlToBrowser();
     }
-
 
 }

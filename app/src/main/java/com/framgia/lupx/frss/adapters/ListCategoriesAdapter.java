@@ -1,14 +1,22 @@
 package com.framgia.lupx.frss.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.framgia.lupx.frss.AppConfigs;
 import com.framgia.lupx.frss.R;
+import com.framgia.lupx.frss.asynctasks.ImageResourceLoader;
+import com.framgia.lupx.frss.cache.BitmapLruCache;
 import com.framgia.lupx.frss.models.RSSCategory;
 
 import java.util.List;
@@ -44,6 +52,11 @@ public class ListCategoriesAdapter extends RecyclerView.Adapter<ListCategoriesAd
         RSSCategory category = categories.get(position);
         holder.lbCategoryName.setText(category.name);
         holder.lbCategoryName.setTypeface(AppConfigs.getInstance().ROBOTO_LIGHT);
+        if (holder.task != null) {
+            holder.task.cancel(true);
+        }
+        holder.task = new ImageResourceLoader(context, holder.img);
+        holder.task.execute(category.thumbnail);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,10 +73,13 @@ public class ListCategoriesAdapter extends RecyclerView.Adapter<ListCategoriesAd
 
     public class CategoryViewHolder extends RecyclerView.ViewHolder {
         public TextView lbCategoryName;
+        public ImageView img;
+        public ImageResourceLoader task;
 
         public CategoryViewHolder(View view) {
             super(view);
             lbCategoryName = (TextView) view.findViewById(R.id.lbCategoryName);
+            img = (ImageView) view.findViewById(R.id.img);
         }
     }
 

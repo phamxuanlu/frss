@@ -29,13 +29,17 @@ public class RSSCategory {
     @DBField(fieldName = "corLong", type = "real")
     public double cordinateLong;
 
+    @DBField(fieldName = "thumbnail", type = "integer")
+    public int thumbnail;
+
     public List<RSSItem> items = new ArrayList<>();
 
-    public RSSCategory(String name, String url, LatLng cor) {
+    public RSSCategory(String name, String url, LatLng cor, int thumbnail) {
         this.name = name;
         this.url = url;
         this.cordinateLat = cor.latitude;
         this.cordinateLong = cor.longitude;
+        this.thumbnail = thumbnail;
     }
 
     public RSSCategory() {

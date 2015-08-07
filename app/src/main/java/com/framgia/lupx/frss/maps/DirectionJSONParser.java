@@ -21,7 +21,6 @@ public class DirectionJSONParser {
         JSONArray jRoutes = null;
         JSONArray jLegs = null;
         JSONArray jSteps = null;
-
         try {
             jRoutes = jObject.getJSONArray("routes");
             for (int i = 0; i < jRoutes.length(); i++) {
@@ -49,7 +48,7 @@ public class DirectionJSONParser {
         } catch (JSONException je) {
             je.printStackTrace();
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
         return routes;
     }

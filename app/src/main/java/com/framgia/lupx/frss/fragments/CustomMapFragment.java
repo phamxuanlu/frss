@@ -22,6 +22,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -69,6 +70,12 @@ public class CustomMapFragment extends Fragment {
         map.animateCamera(CameraUpdateFactory.newLatLng(location));
     }
 
+    public void fitPoints(LatLng ori, LatLng dest) {
+        LatLngBounds bnds = new LatLngBounds.Builder().include(ori).include(dest).build();
+        CameraUpdate cm = CameraUpdateFactory.newLatLngBounds(bnds, 100);
+        map.animateCamera(cm);
+    }
+
     private void setupViews(View view) {
         cityName = ((MapActivity) getActivity()).getLocationName();
         try {
@@ -84,13 +91,17 @@ public class CustomMapFragment extends Fragment {
             myLocation = getBestKnowLocation();
             if (myLocation == null) {
                 myLocation = new Location("");
-                myLocation.setLatitude(20.9397);
-                myLocation.setLongitude(106.3306);
+                myLocation.setLatitude(21.017554);
+                myLocation.setLongitude(105.784307);
             }
             Log.v("LOCATION", "(Lat,Long)=(" + myLocation.getLatitude() + "," + myLocation.getLongitude() + ")");
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public Location getMyLocation() {
+        return this.myLocation;
     }
 
     private Location getBestKnowLocation() {

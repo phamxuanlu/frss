@@ -56,7 +56,6 @@ public class GetDirectionDataAsyncTask extends AsyncTask<String, Void, String> {
             if (connection != null)
                 connection.disconnect();
         }
-
         return data;
     }
 

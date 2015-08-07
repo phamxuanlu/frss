@@ -50,17 +50,22 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<CategoryDetailAd
     @Override
     public void onBindViewHolder(ItemViewHolder holder, final int position) {
         RSSItem item = category.items.get(position);
-        holder.txtTitle.setText(item.title);
+        String tt = item.description;
+        if (item.description.length() >= 200) {
+            tt = item.description.substring(0, 200);
+            tt += " ...";
+        }
+        holder.txtTitle.setText(tt);
         holder.txtDes.setText(item.description);
         if (holder.task != null && !holder.task.isCancelled()) {
             holder.task.cancel(true);
         }
         if (item.thumbnail != null && !item.thumbnail.equals("")) {
+            holder.img.setTag(item.thumbnail);
             holder.task = new LoadImageAsyncTask(context, holder.img);
             holder.task.execute(item.thumbnail);
-            holder.img.setVisibility(View.VISIBLE);
         } else {
-            holder.img.setVisibility(View.GONE);
+            holder.img.setImageResource(R.drawable.no_image_large);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -4,9 +4,10 @@
     <color name="color_primary">#03A9F4</color>
     <color name="color_primary_dark">#0288D1</color>
     <color name="color_accent">#03A9F4</color>
-
+    <color name="color_text_color">#FFFFFF</color>
     <!--Home activity-->
     <color name="home_tab_background">#ff60f4e1</color>
+    <color name="item_bg_divider">#CCCCCC</color>
 
     <!--Navigation-->
     <color name="nav_row_text_color">#101010</color>
@@ -16,4 +17,7 @@
     <color name="cat_detail_text_color">#101010</color>
     <color name="cat_detail_text_background">#FFFFFF</color>
 
+    <color name="item_text_color">#FFFFFF</color>
+    <color name="item_text_bg">#70000000</color>
+    <color name="app_bg">#FFFFFF</color>
 </resources>

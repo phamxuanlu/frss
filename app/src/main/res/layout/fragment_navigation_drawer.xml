@@ -6,11 +6,41 @@
     android:paddingLeft="@dimen/nav_frag_padding"
     android:paddingRight="@dimen/nav_frag_padding">
 
+    <RelativeLayout
+        android:id="@+id/app"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/nav_item_margin_top">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/image_medium_size_height"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/frss" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/logo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/padding_top_bottom"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="?attr/colorPrimary"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/drawerList"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@+id/copyright" />
+        android:layout_above="@+id/copyright"
+        android:layout_below="@+id/app"
+        android:layout_marginTop="@dimen/nav_frag_padding" />
 
     <TextView
         android:id="@+id/copyright"
